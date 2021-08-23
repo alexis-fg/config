@@ -1,0 +1,9 @@
+[submodule "vim/pack/plugins/start/vimwiki"]
+	path = vim/pack/plugins/start/vimwiki
+	url = git@github.com:vimwiki/vimwiki.git
+[submodule "vim/pack/plugins/start/vim-latex-live-preview"]
+	path = vim/pack/plugins/start/vim-latex-live-preview
+	url = git@github.com:conornewton/vim-latex-preview.git
+[submodule "vim/pack/plugins/start/lightline"]
+	path = vim/pack/plugins/start/lightline
+	url = git@github.com:itchyny/lightline.vim.git
