@@ -10,7 +10,7 @@ Détails à venir
 # Fichiers
 
 ## Linux
-Fichier ’fr’ à placer dans /usr/share/X11/xkb/symbols
+Fichier "fr" à placer dans "/usr/share/X11/xkb/symbols"
 La partie avec les changements apportés au layout bépo classique se trouvent à la fin du fichier
 
 ```
@@ -21,4 +21,9 @@ xkb_symbols "bepo-afg" {
 };
 
 ```
+
+## Macos
+Fichier "bepo - afg" à placer dans "~/Library/Keyboard Layouts/"
+
+
 
