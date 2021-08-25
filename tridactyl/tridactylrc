@@ -1,0 +1,35 @@
+" [HJKL] -> {CTSR}
+" ————————————————
+" {cr} = « gauche / droite »
+keymap c h
+keymap r l
+" {ts} = « haut / bas »
+keymap t j
+keymap s k
+" {CR} = « haut / bas de l'écran »
+keymap C H
+keymap R L
+" {TS} = « joindre / aide »
+keymap T J
+keymap S K
+"" Corollaire : repli suivant / précédent
+"keymap zs zj
+"keymap zt zk
+ 
+" {HJKL} <- [CTSR]
+" ————————————————
+" {J} = « Jusqu'à »            (j = suivant, J = précédant)
+keymap j t
+keymap J T
+" {L} = « Change »             (l = attend un mvt, L = jusqu'à la fin de ligne)
+keymap l c
+keymap L C
+" {H} = « Remplace »           (h = un caractère slt, H = reste en « Remplace »)
+keymap h r
+keymap H R
+" {K} = « Substitue »          (k = caractère, K = ligne)
+keymap k s
+keymap K S
+"" Corollaire : correction orthographique
+"keymap ]k ]s
+"keymap [k [s
