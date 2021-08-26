@@ -1,0 +1,12 @@
+#unbind common t toggle show_remaining_time
+#unbind common s toggle shuffle
+
+unbind common t
+unbind common s
+#unbind common j
+#unbind common k
+
+bind common t win-down
+bind common s win-up
+#bind common j toggle show_remaining_time
+#bind common k toggle shuffle
