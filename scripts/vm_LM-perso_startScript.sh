@@ -9,8 +9,11 @@ cd $scriptsDir
 
 
 # exec scripts
-echo "Resize résolution 2560x1440"
+echo "Resize resolution 2560x1440"
 sh ./resizeResoToWqhd.sh
 
-echo "Passage layout bepo/afg"
+echo "change to bepo-afg keyboard layout"
 sh ./setBepoAfgLayout.sh
+
+echo "Mount shared folder"
+sudo mount -t cifs -o user=afg,iocharset=utf8,noperm //debian.local/partage-LM-perso/ ~/data
