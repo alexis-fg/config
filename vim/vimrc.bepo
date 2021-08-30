@@ -3,6 +3,7 @@
 " {cr} = « gauche / droite »
 noremap c h
 noremap r l
+
 " {ts} = « haut / bas »
 noremap t j
 noremap s k
@@ -12,6 +13,7 @@ noremap gs gk
 " {CR} = « haut / bas de l'écran »
 noremap C H
 noremap R L
+
 " {TS} = « joindre / aide »
 noremap T J
 noremap S K
@@ -37,6 +39,26 @@ noremap K S
 noremap ]k ]s
 noremap [k [s
 
+
+" GESTION FENETRES
+" ————————————————
+"split horizontal
+noremap <C-w>h <C-w>s
+"split vertical (pas de remappage)
+"<C-w>v 
+
+" {cr} = « gauche / droite » pour le split fenetre
+noremap <C-w>c <C-w>h
+noremap <C-w>r <C-w>l
+" {cr} = « haut / bas » pour le split fenetre
+noremap <C-w>t <C-w>j
+noremap <C-w>s <C-w>k
+
+"noremap wd <C-w>c
+"noremap wo <C-w>s
+"noremap wp <C-w>o
+"noremap w<SPACE> :split<CR>
+"noremap w<CR> :vsplit<CR>
 
 " Pour avoir bas/haut avec la commande :EX
 if has("autocmd")
