@@ -13,3 +13,5 @@ setxkbmap fr bepo-afg
 
 echo "Reload i3 config"
 i3-msg reload
+# charge fond ecran
+feh --bg-scale ~/Téléchargements/livia-sAVFADKItCo-unsplash.jpg 

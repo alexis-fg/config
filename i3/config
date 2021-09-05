@@ -147,7 +147,7 @@ bindsym $mod+Shift+asterisk move container to workspace number $ws10
 # applications démarrage
 #exec --no-startup-id xfce4-terminal 
 #exec --no-startup-id feh --bg-scale ~/data/images/wallpapers/livia-sAVFADKItCo-unsplash.jpg  
-exec --no-startup-id feh --bg-scale ~/Téléchargements/livia-sAVFADKItCo-unsplash.jpg 
+#exec --no-startup-id feh --bg-scale ~/Téléchargements/livia-sAVFADKItCo-unsplash.jpg 
 #exec --no-startup-id firefox
 
 # reload the configuration file
@@ -200,8 +200,8 @@ gaps inner 15
 #gaps outer 10
 
 # gaps si fenetre seule
-smart_gaps on
-smart_borders on
+#smart_gaps on
+#smart_borders on
 
 # format titre fenetre
 #for_window [class=".*"] border pixel 2 
