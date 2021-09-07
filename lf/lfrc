@@ -3,3 +3,14 @@ map c updir
 map t down
 map s up
 map r open
+
+map l rename
+map D trash 
+map <c-c> clear
+
+
+
+# Commands
+
+# move current file or selected files to trash folder
+cmd trash %set -f; mv $fx ~/.Trash
