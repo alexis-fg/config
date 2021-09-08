@@ -25,11 +25,10 @@ map kc :set sortby ctime; set info ctime
 map ke :set sortby ext; set info
 
 # others
-map m # unmap
 map D trash 
 map <c-c> clear
-map b mark-load
-map B mark-save
+map ` mark-load
+map m mark-save
 
 # Commands binding
 map a push :mkdir<space>
