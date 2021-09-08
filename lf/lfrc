@@ -1,16 +1,73 @@
-# Binding
-map c updir
-map t down
-map s up
-map r open
+# === Config ===
+set hidden true
+set info size:time
+set drawbox
 
-map l rename
+
+# === Binding ===
+ 
+# hjkl -> ctsr
+map c updir # old h
+map t down  # old j 
+map s up    # old k  
+map r open  # old l
+
+# tsrl -> ***l 
+map h # unmap
+map j # unmap
+map k # unmap
+map l rename # old l
+map kn :set sortby natural; set info
+map ks :set sortby size; set info size
+map kt :set sortby time; set info time
+map ka :set sortby atime; set info atime
+map kc :set sortby ctime; set info ctime
+map ke :set sortby ext; set info
+
+# others
+map m # unmap
 map D trash 
 map <c-c> clear
+map b mark-load
+map B mark-save
 
+# Commands binding
+map a push :mkdir<space>
+map o push :open-with<space>
 
+#map x push :yank-dirname<enter>
+map <c-p> push :yank-path<enter>
+map É push :yank-basename<enter>
+map é push :yank-basename-without-extension<enter>
 
-# Commands
+# === Commands ====
 
 # move current file or selected files to trash folder
-cmd trash %set -f; mv $fx ~/.Trash
+# si linux :
+# verifie existance trash-cli et utilise cetet commande
+# si macos :
+#cmd trash %set -f; mv $fx ~/.Trash/
+#cmd trash %trash-put "$fx"
+
+# make directories
+#map a push %mkdir<space>
+cmd mkdir %mkdir -p "$@"
+
+# open with
+cmd mkdir %mkdir "$@"
+map a push :mkdir<space>
+
+# open with
+cmd mkdir %mkdir "$@"
+map a push :mkdir<space>
+
+# open with
+cmd open-with %"$@" $fx
+
+
+# copy dirname, path, basename, ... (use xclip)
+#cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
+cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
+cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
+cmd yank-basename-without-extension &basename -a -- $fx | rev | cut -d. -f2- | rev | head -c-1 | xclip -i -selection clipboard
+
