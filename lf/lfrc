@@ -1,6 +1,11 @@
+# === Dependencies ===
+
+# trash-cli
+# xclip
+
 # === Config ===
 set hidden true
-set info size:time
+set info size:atime
 set drawbox
 
 
@@ -30,10 +35,10 @@ map <c-c> clear
 map ` mark-load
 map m mark-save
 
-# Commands binding
+# custom commands binding
 map a push :mkdir<space>
 map o push :open-with<space>
-
+map b show-selection
 #map x push :yank-dirname<enter>
 map <c-p> push :yank-path<enter>
 map É push :yank-basename<enter>
@@ -41,28 +46,53 @@ map é push :yank-basename-without-extension<enter>
 
 # === Commands ====
 
+# show selection
+#cmd show-selection %echo "$fx" > ~/lf-test.txt
+#cmd show-selection %echo "$fx" > ~/lf-test.txt
+#cmd show-selection $printf "$fx" | sed 's/\r/" "/' > ~/lf-test.txt
+#cmd show-selection $awk -v d="xx xx" '{s=(NR==1?s:s d)$0}END{print s}' "$fx" > ~/lf-test.txt
+#cmd show-selection $printf "$fx" | tr -d '\r' "$fx" > ~/lf-test.txt
+#cmd show-selection ${{
+#    "$fx" | %sed s/\r/" "/ > ~/lf-test.txt
+#}}
+cmd show-selection ${{
+    filesList=($printf '%s' "%fx")
+    joinList=$(awk -v d="xx xx" '{s=(NR==1?s:s d)$0}END{print s}' $filesList)
+    #echo $fx >> lf-result2.txt
+    echo $filesList > lf-result.txt
+    echo $joinList > lf-result2.txt
+}}
+
 # move current file or selected files to trash folder
-# si linux :
-# verifie existance trash-cli et utilise cetet commande
-# si macos :
 #cmd trash %set -f; mv $fx ~/.Trash/
 #cmd trash %trash-put "$fx"
+cmd trash ${{
+    set -f
+    printf "$fx\n"
+    printf "delete?[y/n]"
+
+    printf "\n"
+
+    pathList="'"$(echo "$fx" | awk -v d="' '" '{s=(NR==1?s:s d)$0}END{print s}')"'"
+
+    echo $pathList
+    
+
+    #filesList=`printf "$fx\n"`
+    #joinList=$(awk -v d="' '" '{s=(NR==1?s:s d)$0}END{print s}' $filesList)
+    #printf $filesList
+    
+    read ans
+    #[ $ans = "y" ] && trash-put "$fx"
+    [ $ans = "y" ] && trash-put $pathList
+}}
 
 # make directories
 #map a push %mkdir<space>
 cmd mkdir %mkdir -p "$@"
 
 # open with
-cmd mkdir %mkdir "$@"
-map a push :mkdir<space>
-
-# open with
-cmd mkdir %mkdir "$@"
-map a push :mkdir<space>
-
-# open with
 cmd open-with %"$@" $fx
-
 
 # copy dirname, path, basename, ... (use xclip)
 #cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
