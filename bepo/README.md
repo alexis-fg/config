@@ -1,11 +1,19 @@
-# Layou bépo
+# Layout bépo
 
 Mappage personnalisé bépo pour linux, macos et windows.
 Plus d’infos sur les possibilités de personnalisation ici : https://bepo.fr/wiki/Trucs_et_astuces
 
 ## Changements apportés :
 
-Détails à venir
+| bépo original | modif  | modif | modif | modif       |
+|               | direct | shift | alt   | alt + shift |
+|---------------|--------|-------|-------|-------------|
+| «             |        |       |       |             |
+| »             |        |       |       |             |
+| ^             |        |       |       |             |
+| !             |        |       |       |             |
+| ù             |        |       |       |             |
+| ¨             |        |       |       |             |
 
 # Fichiers
 

@@ -194,10 +194,15 @@ bar {
         
 }
 
+
+# border focus
+#client.focus #555555
+client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
+
 # ==== i3-gaps ====
 
 # gaps entre fenetres
-gaps inner 15
+gaps inner 10
 #gaps outer 10
 
 # gaps si fenetre seule

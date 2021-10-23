@@ -1360,8 +1360,8 @@ xkb_symbols "bepo-afg" {
     key <AC02> { [               u,            U,         bracketleft,         Ugrave ] }; // u U [ Ù
     key <AC03> { [               i,            I,        bracketright,  dead_abovedot ] }; // i I ̈[˙
 
-    key <AC05> { [           comma,    semicolon, apostrophe, dead_horn ] }; // , ; ' ̛
-    key <AB06> { [ rightsinglequotemark,     question,   questiondown,      dead_hook ] }; // ’ ? ¿ ̉
+//    key <AC05> { [           comma,    semicolon, apostrophe, dead_horn ] }; // , ; ' ̛
+//    key <AB06> { [ rightsinglequotemark,     question,   questiondown,      dead_hook ] }; // ’ ? ¿ ̉
 
 
    

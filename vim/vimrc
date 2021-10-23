@@ -3,41 +3,117 @@
 " Sets only once the value of g:env to the running environment
 " from romainl
 " https://gist.github.com/romainl/4df4cde3498fada91032858d7af213c2
-function! Config_setEnv() abort
-    if exists('g:Env')
-        return
-    endif
-    if has('win64') || has('win32') || has('win16')
-        let g:Env = 'WINDOWS'
-    else
-       let g:Env = toupper(substitute(system('uname'), '\n', '', ''))
-    endif
-endfunction
+"function! Config_setEnv() abort
+"    if exists('g:Env')
+"        return
+"    endif
+"    if has('win64') || has('win32') || has('win16')
+"        let g:Env = 'WINDOWS'
+"    else
+"       let g:Env = toupper(substitute(system('uname'), '\n', '', ''))
+"    endif
+"endfunction
 
 
 
-" PATHS
-
-set viminfo+=n~/.vim/viminfo
 
 " set runtimepath^=~/.vim/bundle/latexlivepreview.vim
 "set packpath=~/.vim/pack/vendor
 
-" BEPO
+" ===== BEPO =====
 " plus d’infos ici : https://bepo.fr/wiki/Vim 
 "source ~/.vim/vimrc.bepo
-call Config_setEnv()
-if (g:Env =~# 'WINDOWS')
-    " Enable Windows specific settings/plugins
-    source $HOME\vimfiles\vimrc.bepo
-"else if (g:Env =~# 'LINUX')
-else 
-    " Enable Linux specific settings/plugins
-    source ~/.vim/vimrc.bepo
+"call Config_setEnv()
+"if (g:Env =~# 'WINDOWS')
+"    " Enable Windows specific settings/plugins
+"    source $HOME\vimfiles\vimrc.bepo
+""else if (g:Env =~# 'LINUX')
+"else 
+"    " Enable Linux specific settings/plugins
+"    source ~/.vim/vimrc.bepo
+"endif
+
+
+" [HJKL] -> {CTSR}
+" ————————————————
+" {cr} = « gauche / droite »
+noremap c h
+noremap r l
+
+" {ts} = « haut / bas »
+noremap t j
+noremap s k
+" {ts} = « haut / bas » pour une meme ligne
+noremap gt gj
+noremap gs gk
+" {CR} = « haut / bas de l'écran »
+noremap C H
+noremap R L
+
+" {TS} = « joindre / aide »
+noremap T J
+noremap S K
+" Corollaire : repli suivant / précédent
+noremap zs zj
+noremap zt zk
+ 
+" {HJKL} <- [CTSR]
+" ————————————————
+" {J} = « Jusqu'à »            (j = suivant, J = précédant)
+noremap j t
+noremap J T
+" {L} = « Change »             (l = attend un mvt, L = jusqu'à la fin de ligne)
+noremap l c
+noremap L C
+" {H} = « Remplace »           (h = un caractère slt, H = reste en « Remplace »)
+noremap h r
+noremap H R
+" {K} = « Substitue »          (k = caractère, K = ligne)
+noremap k s
+noremap K S
+" Corollaire : correction orthographique
+noremap ]k ]s
+noremap [k [s
+
+
+" GESTION FENETRES
+" ————————————————
+"split horizontal
+noremap <C-w>h <C-w>s
+"split vertical (pas de remappage)
+"<C-w>v 
+
+" {cr} = « gauche / droite » pour le split fenetre
+noremap <C-w>c <C-w>h
+noremap <C-w>r <C-w>l
+" {cr} = « haut / bas » pour le split fenetre
+noremap <C-w>t <C-w>j
+noremap <C-w>s <C-w>k
+
+"noremap wd <C-w>c
+"noremap wo <C-w>s
+"noremap wp <C-w>o
+"noremap w<SPACE> :split<CR>
+"noremap w<CR> :vsplit<CR>
+
+" Pour avoir bas/haut avec la commande :EX
+if has("autocmd")
+augroup netrw_dvorak_fix
+    autocmd!
+    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
+augroup END
+function! Fix_netrw_maps_for_dvorak()
+    noremap <buffer> t j
+    noremap <buffer> s k
+    noremap <buffer> k s
+endfunction
 endif
 
-" GENERAL
 
+
+" ===== GENERAL =====
+
+set encoding=utf-8
 set smartindent
 set autoindent
 set tabstop=4
@@ -53,6 +129,9 @@ set foldmethod=syntax
 " set path+=** => freeze la fenetre. trop de fichiers a scanner
 " set wildmenu
 
+" paths
+set viminfo+=n~/.vim/viminfo
+
 " browsing
 let g:netrw_banner=0        " disable annoying banner
 "let g:netrw_browse_split=4  " open in prior window
@@ -65,6 +144,16 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " leader
 let mapleader=","
 
+" spell check
+set spellfile=~/.vim/spell/fr.utf-8.add,~/.vim/spell/eo.utf-8.add
+map <F5> :setlocal spell! spelllang=en_us<CR>
+map <F6> :setlocal spell! spelllang=fr<CR>
+map <F7> :setlocal spell! spelllang=eo<CR>
+
+
+
+
+" ===== PLUGIN =====
 " vim-latex-live-preview settings
 " autocmd Filetype tex setl updatetime=1
 let g:livepreview_previewer = 'open -a Preview'
@@ -80,12 +169,6 @@ let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext'
 "au FileType vimwiki setlocal shiftwidth=6 tabstop=6 noexpandtab
 " insert template prod
 nnoremap ,pt :-1read ~/Dropbox/vimwiki/.prodtemplate.md<CR>
-
-" spell check
-set spellfile=~/.vim/spell/fr.utf-8.add,~/.vim/spell/eo.utf-8.add
-map <F5> :setlocal spell! spelllang=en_us<CR>
-map <F6> :setlocal spell! spelllang=fr<CR>
-map <F7> :setlocal spell! spelllang=eo<CR>
 
 " Goyo + Limelight
 nnoremap <leader>gy :Goyo 90%<CR>
