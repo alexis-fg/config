@@ -37,12 +37,14 @@ map m mark-save
 
 # custom commands binding
 map a push :mkdir<space>
+map . :open-finder-window
 map o push :open-with<space>
-map b show-selection
+#map b show-selection
 #map x push :yank-dirname<enter>
-map <c-p> push :yank-path<enter>
-map É push :yank-basename<enter>
-map é push :yank-basename-without-extension<enter>
+#map <c-p> push :yank-path<enter>
+#map É push :yank-basename<enter>
+#map é push :yank-basename-without-extension<enter>
+map P :yank-path
 
 # === Commands ====
 
@@ -55,6 +57,7 @@ map é push :yank-basename-without-extension<enter>
 #cmd show-selection ${{
 #    "$fx" | %sed s/\r/" "/ > ~/lf-test.txt
 #}}
+
 cmd show-selection ${{
     filesList=($printf '%s' "%fx")
     joinList=$(awk -v d="xx xx" '{s=(NR==1?s:s d)$0}END{print s}' $filesList)
@@ -64,39 +67,36 @@ cmd show-selection ${{
 }}
 
 # move current file or selected files to trash folder
-#cmd trash %set -f; mv $fx ~/.Trash/
-#cmd trash %trash-put "$fx"
 cmd trash ${{
-    set -f
-    printf "$fx\n"
-    printf "delete?[y/n]"
-
-    printf "\n"
-
-    pathList="'"$(echo "$fx" | awk -v d="' '" '{s=(NR==1?s:s d)$0}END{print s}')"'"
-
-    echo $pathList
-    
-
-    #filesList=`printf "$fx\n"`
-    #joinList=$(awk -v d="' '" '{s=(NR==1?s:s d)$0}END{print s}' $filesList)
-    #printf $filesList
-    
-    read ans
-    #[ $ans = "y" ] && trash-put "$fx"
-    [ $ans = "y" ] && trash-put $pathList
+     if [ -z "$fs" ]; then
+        #trash "$f" 
+        trash-put --trash-dir ~/.Trash "$f"
+    else
+        #IFS="`printf '\n\t'`"; trash $fs
+        IFS="`printf '\n\t'`"; trash-put --trash-dir ~/.Trash  $fs
+    fi
 }}
 
 # make directories
-#map a push %mkdir<space>
-cmd mkdir %mkdir -p "$@"
+cmd mkdir ${{
+    mkdir -p "$@"
+}}
+
+# open Finder Window
+cmd open-finder-window ${{
+    open "$PWD"
+}}
 
 # open with
 cmd open-with %"$@" $fx
 
 # copy dirname, path, basename, ... (use xclip)
-#cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
-cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
+cmd yank-path ${{
+    #printf '%s' "$fx" | xclip -i -selection clipboard
+    printf '%s' "$fx" | pbcopy 
+}}
+
+cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
 cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
 cmd yank-basename-without-extension &basename -a -- $fx | rev | cut -d. -f2- | rev | head -c-1 | xclip -i -selection clipboard
 
