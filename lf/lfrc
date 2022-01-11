@@ -69,11 +69,11 @@ cmd show-selection ${{
 # move current file or selected files to trash folder
 cmd trash ${{
      if [ -z "$fs" ]; then
-        #trash "$f" 
-        trash-put --trash-dir ~/.Trash "$f"
+        trash-put -v "$f" 
+        #trash-put --trash-dir ~/.Trash "$f"
     else
-        #IFS="`printf '\n\t'`"; trash $fs
-        IFS="`printf '\n\t'`"; trash-put --trash-dir ~/.Trash  $fs
+        IFS="`printf '\n\t'`"; trash-put -v $fs
+        #IFS="`printf '\n\t'`"; trash-put --trash-dir ~/.Trash  $fs
     fi
 }}
 
