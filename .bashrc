@@ -9,6 +9,8 @@ alias dropbox='flatpak run com.dropbox.Client'
 alias nextcloud='flatpak run com.nextcloud.desktopclient.nextcloud'
 alias onlyoffice='flatpak run org.onlyoffice.desktopeditors'
 alias anydesk='flatpak run com.anydesk.Anydesk'
+alias skype='flatpak run com.skype.Client'
+alias zoom='flatpak run us.zoom.Zoom'
 
 
 
