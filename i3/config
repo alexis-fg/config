@@ -110,11 +110,11 @@ bindsym $mod+p focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
+set $ws1 "1: Ter."
+set $ws2 "2: Nav."
+set $ws3 "3: Soc."
+set $ws4 "4: Fil."
+set $ws5 "5: Any."
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -144,6 +144,13 @@ bindsym $mod+Shift+plus move container to workspace number $ws7
 bindsym $mod+Shift+minus move container to workspace number $ws8
 bindsym $mod+Shift+slash move container to workspace number $ws9
 bindsym $mod+Shift+asterisk move container to workspace number $ws10
+
+# application by workspaces
+assign [class="URxvt"] $ws1
+assign [class="Firefox"] $ws2
+assign [class="Signal|Discord|Skype|Zoom"] $ws3
+assign [class="Thunar|Onlyoffice"] $ws4
+assign [class="Anydesk"] $ws5
 
 # applications démarrage
 #exec --no-startup-id xfce4-terminal 
