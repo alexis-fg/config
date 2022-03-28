@@ -150,7 +150,11 @@ map <F5> :setlocal spell! spelllang=en_us<CR>
 map <F6> :setlocal spell! spelllang=fr<CR>
 map <F7> :setlocal spell! spelllang=eo<CR>
 
+" syntax
+autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
 
+" style
+" https://alvinalexander.com/linux/vi-vim-editor-color-scheme-syntax/
 
 
 " ===== PLUGIN =====
