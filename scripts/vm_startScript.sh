@@ -14,7 +14,6 @@ curname=`hostname`
 # TODO
 
 
-
 # commands
 echo "Resize resolution 2560x1440"
 xrandr --newmode "2560x1440_60.00" 311.83 2560 2744 3024 3488 1440 1441 1444 1490 -HSync +Vsync
@@ -25,6 +24,14 @@ if [ $curname = $lmperso ]
     then
         echo "Change background"
         feh --bg-scale ~/data/images/wallpapers/livia-sAVFADKItCo-unsplash.jpg 
+
+        # vpn
+        #echo "Connect vpn"
+        sudo nordvpn c
+
+        # client dropbox
+        #echo "Start maestral"
+        maestral start -c personnel
 fi
 
 if [ $curname = $lmprod ]
@@ -44,5 +51,3 @@ i3-msg reload
 echo "Reload Xresources"
 xrdb ~/.Xresources
 
-echo "Connect vpn"
-sudo nordvpn c

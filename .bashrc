@@ -12,9 +12,13 @@ alias anydesk='flatpak run com.anydesk.Anydesk'
 alias skype='flatpak run com.skype.Client'
 alias zoom='flatpak run us.zoom.Zoom'
 
-
+# history
+HISTTIMEFORMAT="%F %T "
+HISTCONTROL=ignoredups
 
 # Path (.bashrc is an external ln -s)
-PATH="$HOME/data/bin:$PATH"
+#PATH="$HOME/data/bin:$PATH"
+PATH=$PATH:"$HOME/data/bin"
+PATH=$PATH:"$HOME/.local/bin"
 
 
