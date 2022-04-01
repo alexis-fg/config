@@ -1,12 +1,15 @@
 # === Dependencies ===
 
-# trash-cli
-# xclip
+# trash-cli # xclip
 
 # === Config ===
-set hidden true
-set info size:atime
-set drawbox
+#set hidden true
+#set info size:atime
+set drawbox true
+set icons true
+#set color256 true
+set ignorecase true
+
 
 
 # === Binding ===
@@ -34,9 +37,12 @@ map D trash
 map <c-c> clear
 map ` mark-load
 map m mark-save
+map y # unmap
+map yy :copy 
 
 # custom commands binding
-map a push :mkdir<space>
+map ad push :mkdir<space>
+map af push :touch<space>
 map . :open-finder-window
 map o push :open-with<space>
 #map b show-selection
@@ -44,7 +50,8 @@ map o push :open-with<space>
 #map <c-p> push :yank-path<enter>
 #map É push :yank-basename<enter>
 #map é push :yank-basename-without-extension<enter>
-map P :yank-path
+map yp copy-path
+map br batch-rename
 
 # === Commands ====
 
@@ -82,21 +89,63 @@ cmd mkdir ${{
     mkdir -p "$@"
 }}
 
+# create file
+cmd touch ${{
+    touch "$@"
+}}
+
 # open Finder Window
 cmd open-finder-window ${{
     open "$PWD"
 }}
 
 # open with
-cmd open-with %"$@" $fx
+#cmd open-with %"$@" $fx
+cmd open-with %open -a "$@" "$fx"
 
 # copy dirname, path, basename, ... (use xclip)
-cmd yank-path ${{
+cmd copy-path ${{
     #printf '%s' "$fx" | xclip -i -selection clipboard
     printf '%s' "$fx" | pbcopy 
 }}
 
-cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
-cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
-cmd yank-basename-without-extension &basename -a -- $fx | rev | cut -d. -f2- | rev | head -c-1 | xclip -i -selection clipboard
+cmd copy-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
+cmd copy-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
+cmd copy-basename-without-extension &basename -a -- $fx | rev | cut -d. -f2- | rev | head -c-1 | xclip -i -selection clipboard
 
+
+# show path on window title
+cmd on-cd &{{
+    # '&' commands run silently in background (which is what we want here),
+    # but are not connected to stdout.
+    # To make sure our escape sequence still reaches stdout we pipe it to /dev/tty
+    printf "\033]0; $PWD\007" > /dev/tty
+}}
+
+# auto number of column depending of the size of the window
+cmd recol &{{
+    w=$(tput cols)
+    if [ $w -le 80 ]; then
+        lf -remote "send $id set ratios 1:2"
+    elif [ $w -le 160 ]; then
+        lf -remote "send $id set ratios 1:2:3"
+    else
+        lf -remote "send $id set ratios 1:2:3:5"
+    fi
+}}
+
+# batch rename
+cmd batch-rename ${{
+    #vimv "$fx"
+     if [ -z "$fs" ]; then
+        vimv "$f"
+    else
+        IFS="`printf '\n\t'`"; vimv $fs 
+    fi
+
+}}
+
+
+# === Run commands at startup ====
+on-cd
+recol

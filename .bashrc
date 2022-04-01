@@ -1,4 +1,3 @@
-
 # Alias
 alias ls='ls --color=auto'
 alias ll='ls -alFh'
@@ -21,4 +20,5 @@ HISTCONTROL=ignoredups
 PATH=$PATH:"$HOME/data/bin"
 PATH=$PATH:"$HOME/.local/bin"
 
-
+# Bepo
+bind $'"\u00a0":" "' # remplace espace insécable par des espaces 

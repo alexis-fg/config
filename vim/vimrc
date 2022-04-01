@@ -151,7 +151,8 @@ map <F6> :setlocal spell! spelllang=fr<CR>
 map <F7> :setlocal spell! spelllang=eo<CR>
 
 " syntax
-autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+"autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+autocmd BufWinEnter *.md setlocal syntax=markdown
 
 " style
 " https://alvinalexander.com/linux/vi-vim-editor-color-scheme-syntax/
@@ -172,7 +173,9 @@ syntax on
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 "au FileType vimwiki setlocal shiftwidth=6 tabstop=6 noexpandtab
 " insert template prod
-nnoremap ,pt :-1read ~/Dropbox/vimwiki/.prodtemplate.md<CR>
+nnoremap ,tp :-1read ~/Dropbox/vimwiki/prod/doc/template_prod.md<CR><S-a>
+nnoremap ,tm :-1read ~/Dropbox/vimwiki/prod/doc/template_masters.md<CR>
+nnoremap ,tc :-1read ~/Dropbox/vimwiki/prod/doc/template_credits.md<CR>
 
 " Goyo + Limelight
 nnoremap <leader>gy :Goyo 90%<CR>

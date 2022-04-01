@@ -1,0 +1,14 @@
+# Alias
+alias ll='ls -alFh'
+
+# history
+HISTTIMEFORMAT="%F %T "
+HISTCONTROL=ignoredups
+
+# Path (.bashrc is an external ln -s)
+#PATH="$HOME/data/bin:$PATH"
+PATH=$PATH:"$HOME/data/bin"
+PATH=$PATH:"$HOME/.local/bin"
+
+# Bepo
+bind $'"\u00a0":" "' # remplace espace insécable par des espaces 
