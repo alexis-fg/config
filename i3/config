@@ -44,7 +44,8 @@ floating_modifier $mod
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec gnome-terminal 
 #bindsym $mod+Return exec xfce4-terminal 
-bindsym $mod+Return exec urxvt 
+#bindsym $mod+Return exec urxvt 
+bindsym $mod+Return exec alacritty 
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -150,7 +151,7 @@ bindsym $mod+Shift+slash move container to workspace number $ws9
 bindsym $mod+Shift+asterisk move container to workspace number $ws10
 
 # application by workspaces (xprop to get the name)
-assign [class="URxvt|Thunar"] $ws1 #terminal/files
+assign [class="URxvt|Thunar|Alacritty"] $ws1 #terminal/files
 assign [class="Firefox|firefox"] $ws2 #web
 assign [class="Signal|Discord|Skype|Zoom"] $ws3 #communication
 assign [class="DesktopEditors"] $ws4 #office
