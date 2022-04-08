@@ -219,7 +219,7 @@ gaps inner 10
 #gaps outer 10
 
 # temp because of broken screen (right side)
-gaps right 250
+#gaps right 250
 
 # gaps si fenetre seule
 #smart_gaps on
