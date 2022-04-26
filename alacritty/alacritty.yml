@@ -118,6 +118,7 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     family: monospace
+    #family: Andale Mono
     #family: DejaVuSansMono Nerd Font
     #family: SpaceMono Nerd Font 
 

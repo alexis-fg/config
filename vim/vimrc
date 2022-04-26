@@ -170,7 +170,8 @@ set laststatus=2
 set nocompatible
 filetype plugin on
 syntax on
-let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+"let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/nc-innervision/_perso/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 "au FileType vimwiki setlocal shiftwidth=6 tabstop=6 noexpandtab
 " insert template prod
 nnoremap ,tp :-1read ~/Dropbox/vimwiki/prod/doc/template_prod.md<CR><S-a>
