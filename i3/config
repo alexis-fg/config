@@ -113,8 +113,8 @@ bindsym $mod+p focus parent
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Sys."
 set $ws2 "2: Nav."
-set $ws3 "3: Com."
-set $ws4 "4: Off."
+set $ws3 "3: Off."
+set $ws4 "4: Com."
 set $ws5 "5: Ext."
 set $ws6 "6"
 set $ws7 "7"
@@ -153,15 +153,16 @@ bindsym $mod+Shift+asterisk move container to workspace number $ws10
 # application by workspaces (xprop to get the name)
 assign [class="URxvt|Thunar|Alacritty"] $ws1 #terminal/files
 assign [class="Firefox|firefox"] $ws2 #web
-assign [class="Signal|Discord|Skype|Zoom"] $ws3 #communication
-assign [class="DesktopEditors"] $ws4 #office
-assign [class="(?i)libreoffice-writer$|(?i)soffice|(?i)libreoffice-calc|(?i)libreoffice.*"] $ws4 #office - libreoffice
+assign [class="DesktopEditors|excel.exe"] $ws3 
+assign [class="(?i)libreoffice-writer$|(?i)soffice|(?i)libreoffice-calc|(?i)libreoffice.*"] $ws3 
+assign [class="Signal|Discord|Skype|Zoom"] $ws4
 assign [class="Anydesk|Filezilla"] $ws5 #acces externe
 
 # applications démarrage
 #exec --no-startup-id xfce4-terminal 
 #exec --no-startup-id feh --bg-scale ~/data/images/wallpapers/livia-sAVFADKItCo-unsplash.jpg  
 #exec --no-startup-id feh --bg-scale ~/Téléchargements/livia-sAVFADKItCo-unsplash.jpg 
+#exec --no-startup-id firefox
 #exec --no-startup-id firefox
 
 # reload the configuration file

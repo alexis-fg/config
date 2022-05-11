@@ -27,11 +27,10 @@ if [ $curname = $lmperso ]
 
         # vpn
         #echo "Connect vpn"
-        sudo nordvpn c
+        sudo nordvpn c fr
 
         # client dropbox
         #echo "Start maestral"
-        maestral start -c personnel
 fi
 
 if [ $curname = $lmprod ]

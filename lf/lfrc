@@ -73,6 +73,16 @@ cmd show-selection ${{
     echo $joinList > lf-result2.txt
 }}
 
+# default program
+cmd open ${{
+    test -L "$f" && f=$(readlink -f "$f")
+    case $(file --mime-type "$f" -b) in
+        text/*) $EDITOR "$f";;
+        application/pdf) xreader "$f";;
+        *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
 # move current file or selected files to trash folder
 cmd trash ${{
      if [ -z "$fs" ]; then
