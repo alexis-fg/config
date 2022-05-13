@@ -117,7 +117,8 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: monospace
+    family: Menlo 
+    #family: monospace
     #family: Andale Mono
     #family: DejaVuSansMono Nerd Font
     #family: SpaceMono Nerd Font 

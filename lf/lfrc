@@ -43,7 +43,7 @@ map yy :copy
 # custom commands binding
 map ad push :mkdir<space>
 map af push :touch<space>
-map . :open-finder-window
+map . :open-file-manager-window
 map o push :open-with<space>
 #map b show-selection
 #map x push :yank-dirname<enter>
@@ -75,13 +75,36 @@ cmd show-selection ${{
 
 # default program
 cmd open ${{
-    test -L "$f" && f=$(readlink -f "$f")
-    case $(file --mime-type "$f" -b) in
-        text/*) $EDITOR "$f";;
-        application/pdf) xreader "$f";;
-        *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
-    esac
+        test -L "$f" && f=$(readlink -f "$f")
+        if [[ "$(uname)" = "Linux" ]]; then
+            case $(file --mime-type "$f" -b) in
+                text/*) $EDITOR "$f";;
+                application/pdf) xreader "$f";;
+                *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
+            esac
+
+        elif [[ "$(uname)" = "Darwin" ]]; then
+            case $(file --mime-type "$f" -b) in
+                #text/*) open -a macvim "$f";;
+                application/vnd.ms-excel|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) open -a "Microsoft Excel" "$f";;
+                application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document) open -a "Microsoft Word" "$f";;
+                *) for f in $fx; do open $f > /dev/null 2> /dev/null & done;;
+            esac
+        fi
 }}
+
+# open with
+#cmd open-with %"$@" $fx
+cmd open-with %open -a "$@" "$fx"
+
+#cmd open ${{
+#    test -L "$f" && f=$(readlink -f "$f")
+#    case $(file --mime-type "$f" -b) in
+#        text/*) $EDITOR "$f";;
+#        application/pdf) xreader "$f";;
+#        *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
+#    esac
+#}}
 
 # move current file or selected files to trash folder
 cmd trash ${{
@@ -96,7 +119,7 @@ cmd trash ${{
 
 # make directories
 cmd mkdir ${{
-    mkdir -p "$@"
+    mkdir -p "$*"
 }}
 
 # create file
@@ -104,14 +127,12 @@ cmd touch ${{
     touch "$@"
 }}
 
-# open Finder Window
-cmd open-finder-window ${{
-    open "$PWD"
+# open file manager in current folder 
+cmd open-file-manager-window ${{
+    if [[ "$(uname)" = "Darwin" ]]; then
+        open "$PWD"
+    fi
 }}
-
-# open with
-#cmd open-with %"$@" $fx
-cmd open-with %open -a "$@" "$fx"
 
 # copy dirname, path, basename, ... (use xclip)
 cmd copy-path ${{
@@ -132,17 +153,6 @@ cmd on-cd &{{
     printf "\033]0; $PWD\007" > /dev/tty
 }}
 
-# auto number of column depending of the size of the window
-cmd recol &{{
-    w=$(tput cols)
-    if [ $w -le 80 ]; then
-        lf -remote "send $id set ratios 1:2"
-    elif [ $w -le 160 ]; then
-        lf -remote "send $id set ratios 1:2:3"
-    else
-        lf -remote "send $id set ratios 1:2:3:5"
-    fi
-}}
 
 # batch rename
 cmd batch-rename ${{
@@ -158,4 +168,3 @@ cmd batch-rename ${{
 
 # === Run commands at startup ====
 on-cd
-recol

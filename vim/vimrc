@@ -174,9 +174,9 @@ syntax on
 let g:vimwiki_list = [{'path': '~/nc-innervision/_perso/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 "au FileType vimwiki setlocal shiftwidth=6 tabstop=6 noexpandtab
 " insert template prod
-nnoremap ,tp :-1read ~/Dropbox/vimwiki/prod/doc/template_prod.md<CR><S-a>
-nnoremap ,tm :-1read ~/Dropbox/vimwiki/prod/doc/template_masters.md<CR>
-nnoremap ,tc :-1read ~/Dropbox/vimwiki/prod/doc/template_credits.md<CR>
+nnoremap ,tp :-1read ~/nc-innervision/_perso/vimwiki/prod/doc/template_prod.md<CR><S-a>
+nnoremap ,tm :-1read ~/nc-innervision/_perso/vimwiki/prod/doc/template_masters.md<CR>
+nnoremap ,tc :-1read ~/nc-innervision/_perso/vimwiki/prod/doc/template_credits.md<CR>
 
 " Goyo + Limelight
 nnoremap <leader>gy :Goyo 90%<CR>
