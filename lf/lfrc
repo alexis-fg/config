@@ -76,14 +76,17 @@ cmd show-selection ${{
 # default program
 cmd open ${{
         test -L "$f" && f=$(readlink -f "$f")
-        if [[ "$(uname)" = "Linux" ]]; then
+        if [ "$(uname)" = "Linux" ]; then
             case $(file --mime-type "$f" -b) in
-                text/*) $EDITOR "$f";;
-                application/pdf) xreader "$f";;
+                #text/*) $EDITOR "$f";;
+                text/*) setsid vim "$f";;
+                application/pdf) setsid xreader "$f";;
+                application/vnd.ms-excel|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) setsid flatpak run --file-forwarding org.onlyoffice.desktopeditors @@ "$f" @@;;
+                application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document) setsid flatpak run --file-forwarding org.onlyoffice.desktopeditors @@ "$f" @@;;
                 *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
             esac
 
-        elif [[ "$(uname)" = "Darwin" ]]; then
+        elif [ "$(uname)" = "Darwin" ]; then
             case $(file --mime-type "$f" -b) in
                 text/*) open -a macvim "$f";;
                 application/vnd.ms-excel|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) open -a "Microsoft Excel" "$f";;
@@ -95,7 +98,16 @@ cmd open ${{
 
 # open with
 #cmd open-with %"$@" $fx
-cmd open-with %open -a "$@" "$fx"
+#cmd open-with %open -a "$@" "$fx"
+cmd open-with ${{
+        test -L "$fx" && f=$(readlink -f "$fx")
+        if [ "$(uname)" = "Linux" ]; then
+            setsid "$@" "$fx"
+        elif [ "$(uname)" = "Darwin" ]; then
+            %open -a "$@" "$fx"
+        fi
+
+}}
 
 #cmd open ${{
 #    test -L "$f" && f=$(readlink -f "$f")
@@ -129,7 +141,9 @@ cmd touch ${{
 
 # open file manager in current folder 
 cmd open-file-manager-window ${{
-    if [[ "$(uname)" = "Darwin" ]]; then
+    if [ "$(uname)" = "Linux" ]; then
+        setsid thunar
+    elif [ "$(uname)" = "Darwin" ]; then
         #open "$PWD"
         open -R "$f"
     fi

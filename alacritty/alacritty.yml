@@ -108,16 +108,16 @@ window:
   #multiplier: 3
 
 # Font configuration
-font:
+#font:
   # Normal (roman) font face
-  normal:
+  #normal:
     # Font family
     #
     # Default:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Menlo 
+    #family: Menlo 
     #family: monospace
     #family: Andale Mono
     #family: DejaVuSansMono Nerd Font
