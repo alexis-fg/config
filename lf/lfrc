@@ -24,7 +24,17 @@ map r open  # old l
 map h # unmap
 map j # unmap
 map k # unmap
-map l rename # old l
+map l # unmap
+
+#map l rename # old l
+
+map le rename # at the very end
+map la push le<c-a> # at the beginning 
+map lu push le<c-u> # new rename 
+map lxa push le<a-b><a-b><a-f> # before dot extension
+map lxe push le<a-b> # after dot extension
+
+map a push A<a-b> # after extension
 map kn :set sortby natural; set info
 map ks :set sortby size; set info size
 map kt :set sortby time; set info time
