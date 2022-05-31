@@ -34,7 +34,6 @@ map lu push le<c-u> # new rename
 map lxa push le<a-b><a-b><a-f> # before dot extension
 map lxe push le<a-b> # after dot extension
 
-map a push A<a-b> # after extension
 map kn :set sortby natural; set info
 map ks :set sortby size; set info size
 map kt :set sortby time; set info time
@@ -101,6 +100,7 @@ cmd open ${{
                 text/*) open -a macvim "$f";;
                 application/vnd.ms-excel|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) open -a "Microsoft Excel" "$f";;
                 application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document) open -a "Microsoft Word" "$f";;
+                application/pdf) open -a preview "$f";;
                 *) for f in $fx; do open $f > /dev/null 2> /dev/null & done;;
             esac
         fi
@@ -114,7 +114,8 @@ cmd open-with ${{
         if [ "$(uname)" = "Linux" ]; then
             setsid "$@" "$fx"
         elif [ "$(uname)" = "Darwin" ]; then
-            %open -a "$@" "$fx"
+            #%open -a "$@" "$fx"
+            open -a "$@" "$fx"
         fi
 
 }}
