@@ -116,7 +116,7 @@ set $ws2 "2: Nav."
 set $ws3 "3: Off."
 set $ws4 "4: Com."
 set $ws5 "5: Ext."
-set $ws6 "6"
+set $ws6 "6: Gra."
 set $ws7 "7"
 set $ws8 "8"
 set $ws10 "9"
@@ -157,6 +157,7 @@ assign [class="DesktopEditors|excel.exe"] $ws3
 assign [class="(?i)libreoffice-writer$|(?i)soffice|(?i)libreoffice-calc|(?i)libreoffice.*"] $ws3 
 assign [class="Signal|Discord|Skype|Zoom"] $ws4
 assign [class="Anydesk|Filezilla"] $ws5 #acces externe
+assign [class="Gimp-2.10|Gimp"] $ws6 #graphisme
 
 # applications démarrage
 #exec --no-startup-id xfce4-terminal 

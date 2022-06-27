@@ -34,7 +34,6 @@ map lu push le<c-u> # new rename
 map lxa push le<a-b><a-b><a-f> # before dot extension
 map lxe push le<a-b> # after dot extension
 
-map a push A<a-b> # after extension
 map kn :set sortby natural; set info
 map ks :set sortby size; set info size
 map kt :set sortby time; set info time
@@ -89,11 +88,12 @@ cmd open ${{
         if [ "$(uname)" = "Linux" ]; then
             case $(file --mime-type "$f" -b) in
                 #text/*) $EDITOR "$f";;
-                text/*) setsid vim "$f";;
-                application/pdf) setsid xreader "$f";;
-                application/vnd.ms-excel|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) setsid flatpak run --file-forwarding org.onlyoffice.desktopeditors @@ "$f" @@;;
-                application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document) setsid flatpak run --file-forwarding org.onlyoffice.desktopeditors @@ "$f" @@;;
-                *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
+                text/*) setsid vim "$f" &;;
+                image/*) setsid xviewer "$f" &;;
+                application/pdf) setsid xreader "$f" &;;
+                application/vnd.ms-excel|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) setsid flatpak run --file-forwarding org.onlyoffice.desktopeditors @@ "$f" @@ &;;
+                application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document) setsid flatpak run --file-forwarding org.onlyoffice.desktopeditors @@ "$f" @@ &;;
+                *) for f in $fx; do xdg-open $f &> /dev/null 2> /dev/null & done;;
             esac
 
         elif [ "$(uname)" = "Darwin" ]; then
@@ -112,7 +112,7 @@ cmd open ${{
 cmd open-with ${{
         test -L "$fx" && f=$(readlink -f "$fx")
         if [ "$(uname)" = "Linux" ]; then
-            setsid "$@" "$fx"
+            setsid "$@" "$fx" &
         elif [ "$(uname)" = "Darwin" ]; then
             %open -a "$@" "$fx"
         fi
